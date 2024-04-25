@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './EditBooksComponent.css';
+import axios from 'axios';
 
 const EditBooksComponent = () => {
   const [bookInfo, setBookInfo] = useState({
@@ -38,14 +39,29 @@ const EditBooksComponent = () => {
   };
 
   const ISBNValidator = () => {
-    //Validate data from backend
+    axios
+      .post(`http://localhost:3500/api/v1/books/validate`,{ISBN : bookInfo.ISBN})
+      .then(response => 
+        {
+          setBookInfo({
+            bookName : response.data.bookName,
+            authorName : response.data.authorName,
+            genre : response.data.genre
+          })
+        })
+      .catch(error => console.log(error))
   };
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
-    //send data to backend
+    axios
+      .patch(`http://localhost:3500/api/v1/books`,bookInfo)
+      .then(response => console.log(response))
+      .catch(error => console.log(error))
   };
+
+
 
   const { bookName, authorName, ISBN, genre } = bookInfo;
 

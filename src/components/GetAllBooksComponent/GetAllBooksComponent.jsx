@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import BookComponent from './BookComponent'
 import './GetAllBooksComponent.css'
+import axios from 'axios'
 
 const GetAllBooksComponent = () => {
 
     const [books, setBooks] = useState([])
 
-    const fetchAllBooks  = async() => {
-        //fetch data from backend
-    }
-
     useEffect(() => {
-        fetchAllBooks()
+        axios
+            .get(`http://localhost:3500/api/v1/books`)
+            .then(response => setBooks(response.data))
+            .catch(error => console.log(error.data.message))
     }, [])
 
   return (
     <div className='books'>
-        {books.map(book=>(
-            <BookComponent book={book}/>
+        {books.map((book,index)=>(
+            <BookComponent book={book} key={index}/>
         ))}
     </div>
   )
