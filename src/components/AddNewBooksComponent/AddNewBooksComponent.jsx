@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import './AddNewBooksComponent.css';
-import axios from 'axios';
+import React, { useState } from 'react'
+import './AddNewBooksComponent.css'
+import axios from 'axios'
 
 const AddNewBooksComponent = () => {
   const [bookInfo, setBookInfo] = useState({
@@ -41,21 +41,8 @@ const AddNewBooksComponent = () => {
   const { bookName, authorName, ISBN, genre } = bookInfo;
 
   const formSubmitHandler = (event) => {
-    event.preventDefault();
-
-    axios
-      .post(`http://localhost:3500/api/v1/books`, bookInfo)
-      .then((response) => {
-        if (response.data.message)
-        {
-          alert(response.data.message)
-        }
-        else{
-          alert(`${response.data.bookName} is added successfully`)
-          window.location.href='/'
-        }
-      })
-  };
+    
+  }
 
 
   return (

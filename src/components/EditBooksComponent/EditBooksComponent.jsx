@@ -39,26 +39,11 @@ const EditBooksComponent = () => {
   };
 
   const ISBNValidator = () => {
-    axios
-      .post(`http://localhost:3500/api/v1/books/validate`,{ISBN : bookInfo.ISBN})
-      .then(response => 
-        {
-          setBookInfo({
-            bookName : response.data.bookName,
-            authorName : response.data.authorName,
-            genre : response.data.genre
-          })
-        })
-      .catch(error => console.log(error))
+    
   };
 
   const formSubmitHandler = (event) => {
-    event.preventDefault();
-
-    axios
-      .patch(`http://localhost:3500/api/v1/books`,bookInfo)
-      .then(response => console.log(response))
-      .catch(error => console.log(error))
+    
   };
 
 
